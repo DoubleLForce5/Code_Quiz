@@ -15,6 +15,7 @@ let time;
 
 let rightAnswer = document.createElement('div')
 rightAnswer.setAttribute('class', 'right-answer')
+// rightAnswer.textContent;
 // list of questions
 const questions = [
   {
@@ -123,11 +124,9 @@ function nextQuestion() {
     currentChoice++;
     choiceEl.appendChild(choiceBtn);
 
-
     mainEl.appendChild(rightAnswer)
 
     choiceBtn.addEventListener("click", checkAnswer);
-
   });
 }
 
@@ -146,6 +145,8 @@ function checkAnswer() {
   document.querySelector(".main-content").textContent = "";
   nextQuestion();
 }
+
+
 
 function endQuiz() {
   clearInterval(time)
