@@ -1,5 +1,3 @@
-// view highscore need clickable
-// welcome info is replaced wih questions
 const mainEl = document.querySelector("main");
 const timeEl = document.querySelector(".count-down");
 
@@ -13,59 +11,60 @@ let correctAnswer = 0;
 let timeLeft = 60;
 let time;
 
-let rightAnswer = document.createElement('div')
-rightAnswer.setAttribute('class', 'right-answer')
-// rightAnswer.textContent;
 // list of questions
 const questions = [
   {
     question: "question1",
-    choices: ["a", "d", "c", "d"],
+    choices: ["a", "b", "c", "d"],
     answer: "a",
   },
   {
     question: "question2",
-    choices: ["a", "d", "c", "d"],
+    choices: ["a", "b", "c", "d"],
     answer: "c",
   },
   {
     question: "question3",
-    choices: ["a", "d", "c", "d"],
+    choices: ["a", "b", "c", "d"],
     answer: "b",
   },
   {
     question: "question4",
-    choices: ["a", "d", "c", "d"],
+    choices: ["a", "b", "c", "d"],
     answer: "a",
   },
   {
     question: "question5",
-    choices: ["a", "d", "c", "d"],
+    choices: ["a", "b", "c", "d"],
     answer: "a",
   },
   {
     question: "question6",
-    choices: ["a", "d", "c", "d"],
+    choices: ["a", "b", "c", "d"],
     answer: "a",
   },
   {
     question: "question7",
-    choices: ["a", "d", "c", "d"],
+    choices: ["a", "b", "c", "d"],
     answer: "a",
   },
 ];
 
-// landing info
-let welcomeDiv = document.createElement("div");
-welcomeDiv.textContent = "hello";
-mainEl.appendChild(welcomeDiv);
-
-// start button
 let startBtn = document.createElement("button");
-startBtn.textContent = "Start";
-mainEl.appendChild(startBtn);
+let welcomeDiv = document.createElement("div");
+let scoresContainer = document.createElement("div");
+let playAgainBtn = document.createElement("button");
+playAgainBtn.setAttribute("class", "play-again-button");
+playAgainBtn.textContent = "Play again";
 
-// onclick of start button timer should begin
+function homePage() {
+  mainEl.appendChild(welcomeDiv);
+  welcomeDiv.textContent = "hello";
+
+  mainEl.appendChild(startBtn);
+  startBtn.textContent = "Start";
+}
+
 function startQuiz() {
   timer();
   renderQuiz();
@@ -73,19 +72,15 @@ function startQuiz() {
 }
 
 function timer() {
-    time = setInterval(function () {
+  time = setInterval(function () {
     timeLeft--;
     timeEl.textContent = timeLeft;
 
-    // conditional
-    // if quiz completed before timer hits 0 end game
-    // else if timer hits 0 end game
-
-    //else if(timeLeft === 0){
-    // end Game function take to highscore screen
-    //}
-    if (timeLeft === 0) {
-      clearInterval(time);
+    if (timeLeft < 0) {
+      timeEl.textContent = 0;
+      endQuiz();
+    } else if (timeLeft === 0) {
+      endQuiz();
     }
   }, 1000);
 }
@@ -103,7 +98,7 @@ function nextQuestion() {
   currentQuestion++;
 
   if (!questions[currentQuestion]) {
-    return endQuiz()
+    return endQuiz();
   }
 
   let questionEl = document.createElement("div");
@@ -124,37 +119,118 @@ function nextQuestion() {
     currentChoice++;
     choiceEl.appendChild(choiceBtn);
 
-    mainEl.appendChild(rightAnswer)
-
     choiceBtn.addEventListener("click", checkAnswer);
   });
 }
 
 function checkAnswer() {
-  if (this.getAttribute("data") == questions[currentQuestion].answer) {
+  if (this.getAttribute("data") === questions[currentQuestion].answer) {
     correctAnswer++;
     score += 5;
-    rightAnswer.textContent = 'Right!'
-    // alert('right!')
   } else {
     timeLeft -= 5;
-    // alert('wrong!')
-    rightAnswer.textContent = 'Wrong!'
   }
 
   document.querySelector(".main-content").textContent = "";
   nextQuestion();
 }
 
-
-
 function endQuiz() {
-  clearInterval(time)
-
-  // All done 
-  // score is _
-  // enter initials - submit button 
+  clearInterval(time);
+  statsPage();
 }
 
+function statsPage() {
+  mainEl.textContent = "";
+
+  let statsEl = document.createElement("div");
+  statsEl.setAttribute("class", "stats");
+  mainEl.appendChild(statsEl);
+
+  let finalMessageEl = document.createElement("h1");
+  finalMessageEl.setAttribute("class", "final-message");
+  finalMessageEl.textContent = "DONE";
+  statsEl.appendChild(finalMessageEl);
+
+  let correctAnswerEl = document.createElement("p");
+  correctAnswerEl.setAttribute("class", "num-correct");
+  correctAnswerEl.textContent =
+    "You got " + correctAnswer + " question(s) out of 7 correct!";
+  statsEl.appendChild(correctAnswerEl);
+
+  let scoreEl = document.createElement("p");
+  scoreEl.setAttribute("class", "score");
+  scoreEl.textContent = "Final score: " + score;
+  statsEl.appendChild(scoreEl);
+
+  let initialsContainerEl = document.createElement("div");
+  initialsContainerEl.textContent = "Enter initials: ";
+  statsEl.appendChild(initialsContainerEl);
+
+  let inputInitialsEl = document.createElement("input");
+  inputInitialsEl.setAttribute("class", "initials");
+  inputInitialsEl.setAttribute("type", "text");
+  inputInitialsEl.setAttribute("name", "initials-text");
+  initialsContainerEl.appendChild(inputInitialsEl);
+
+  let submitBtn = document.createElement("button");
+  submitBtn.setAttribute("class", "submit-button");
+  submitBtn.textContent = "Submit";
+  initialsContainerEl.appendChild(submitBtn);
+
+  submitBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    let initials = inputInitialsEl.value.trim();
+
+    let userScoreInfo = {
+      initials: initials,
+      score: score,
+    };
+
+    if (localStorage.getItem("scores") === null) {
+      localStorage.setItem("scores", "[]");
+    }
+
+    let highscoreList = JSON.parse(localStorage.getItem("scores"));
+    highscoreList.push(userScoreInfo);
+
+    localStorage.setItem("scores", JSON.stringify(highscoreList));
+
+    viewHighscores();
+  });
+}
+
+function viewHighscores() {
+  mainEl.textContent = "";
+
+  let storedScores = JSON.parse(localStorage.getItem("scores"));
+
+  mainEl.appendChild(scoresContainer);
+
+  for (let i = 0; i < storedScores.length; i++) {
+    let userScore = document.createElement("li");
+    userScore.setAttribute("class", "user-scores");
+    userScore.textContent =
+      storedScores[i].initials + " - " + storedScores[i].score;
+    scoresContainer.appendChild(userScore);
+  }
+
+  scoresContainer.appendChild(playAgainBtn);
+}
+
+function reStartQuiz() {
+  mainEl.textContent = "";
+  clearInterval(time);
+  timeEl.textContent = 0;
+  currentQuestion = -1;
+  currentChoice = -1;
+  score = 0;
+  timeLeft = 60;
+  homePage();
+}
 
 startBtn.addEventListener("click", startQuiz);
+playAgainBtn.addEventListener("click", reStartQuiz);
+
+homePage();
