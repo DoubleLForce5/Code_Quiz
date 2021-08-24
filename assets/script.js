@@ -1,5 +1,15 @@
 const mainEl = document.querySelector("main");
 const timeEl = document.querySelector(".count-down");
+let headerEl = document.createElement("h1");
+headerEl.setAttribute("class", "header");
+let startBtn = document.createElement("button");
+let welcomeDiv = document.createElement("div");
+welcomeDiv.setAttribute("class", "welcome");
+startBtn.setAttribute("class", "start-button");
+let scoresContainer = document.createElement("div");
+scoresContainer.setAttribute("class", "scores-container");
+let playAgainBtn = document.createElement("button");
+playAgainBtn.setAttribute("class", "play-again-button");
 
 let currentQuestion = -1;
 let currentChoice = -1;
@@ -50,16 +60,16 @@ const questions = [
   },
 ];
 
-let startBtn = document.createElement("button");
-let welcomeDiv = document.createElement("div");
-let scoresContainer = document.createElement("div");
-let playAgainBtn = document.createElement("button");
-playAgainBtn.setAttribute("class", "play-again-button");
-playAgainBtn.textContent = "Play again";
+
+
 
 function homePage() {
+  mainEl.appendChild(headerEl);
+  headerEl.textContent = "Coding Quiz Challenge";
+
   mainEl.appendChild(welcomeDiv);
-  welcomeDiv.textContent = "hello";
+  welcomeDiv.textContent =
+    "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will subtract 5 second from the clock.";
 
   mainEl.appendChild(startBtn);
   startBtn.textContent = "Start";
@@ -86,8 +96,7 @@ function timer() {
 }
 
 function renderQuiz() {
-  mainEl.removeChild(welcomeDiv);
-  mainEl.removeChild(startBtn);
+  mainEl.textContent = "";
 
   if (questions.length > 6 || timer > 0) {
     console.log(questions.length);
@@ -108,6 +117,7 @@ function nextQuestion() {
 
   let quizChoices = questions[currentQuestion].choices;
   let choiceEl = document.createElement("div");
+  choiceEl.setAttribute("class", "choices-container");
   mainEl.appendChild(choiceEl);
 
   quizChoices.forEach((choice) => {
@@ -149,7 +159,7 @@ function statsPage() {
 
   let finalMessageEl = document.createElement("h1");
   finalMessageEl.setAttribute("class", "final-message");
-  finalMessageEl.textContent = "DONE";
+  finalMessageEl.textContent = "< QUIZ COMPLETE >";
   statsEl.appendChild(finalMessageEl);
 
   let correctAnswerEl = document.createElement("p");
@@ -160,11 +170,11 @@ function statsPage() {
 
   let scoreEl = document.createElement("p");
   scoreEl.setAttribute("class", "score");
-  scoreEl.textContent = "Final score: " + score;
+  scoreEl.textContent = "Final score: " + score + " out of 35 points";
   statsEl.appendChild(scoreEl);
 
   let initialsContainerEl = document.createElement("div");
-  initialsContainerEl.textContent = "Enter initials: ";
+  initialsContainerEl.textContent = "Enter your initials to save your score: ";
   statsEl.appendChild(initialsContainerEl);
 
   let inputInitialsEl = document.createElement("input");
@@ -203,20 +213,39 @@ function statsPage() {
 
 function viewHighscores() {
   mainEl.textContent = "";
+  scoresContainer.textContent = "";
+
+  let highscoresHeaderEl = document.createElement("h1");
+  highscoresHeaderEl.setAttribute("class", "highscores-header");
+  highscoresHeaderEl.textContent = "Highscores";
+  mainEl.appendChild(highscoresHeaderEl);
+
+  let noScoresMsg = document.createElement('p')
+  noScoresMsg.setAttribute('class', 'no-scores')
+  mainEl.appendChild(noScoresMsg)
 
   let storedScores = JSON.parse(localStorage.getItem("scores"));
 
   mainEl.appendChild(scoresContainer);
+  
 
-  for (let i = 0; i < storedScores.length; i++) {
-    let userScore = document.createElement("li");
-    userScore.setAttribute("class", "user-scores");
-    userScore.textContent =
-      storedScores[i].initials + " - " + storedScores[i].score;
-    scoresContainer.appendChild(userScore);
+  if(storedScores == null){
+    noScoresMsg.textContent = 'Be the first to take the quiz and post a score!'
+    scoresContainer.appendChild(playAgainBtn);
+    playAgainBtn.textContent = 'Play now!'
+  } else {
+    for (let i = 0; i < storedScores.length; i++) {
+      let userScore = document.createElement("li");
+      userScore.setAttribute("class", "user-scores");
+      userScore.textContent =
+        storedScores[i].initials + " - " + storedScores[i].score;
+      scoresContainer.appendChild(userScore);
+    }
+    playAgainBtn.textContent = "Play again!";
+    scoresContainer.appendChild(playAgainBtn);
   }
 
-  scoresContainer.appendChild(playAgainBtn);
+
 }
 
 function reStartQuiz() {
