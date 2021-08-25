@@ -51,8 +51,28 @@ main {
 .choices-container {
   display: flex;
   flex-direction: column;
-  padding: 50px;
+  padding: 20px 250px;
 }
+
+.choice-btn {
+  margin-bottom: 5px;
+  padding: 4px;
+  background-color: #B00B69;
+  color: #fff;
+  border: 1px solid #B00B69;
+  border-radius: 13px;
+  opacity: 0.6;
+  transition: 0.3s;
+  cursor: pointer;
+  margin-left: 2px;
+}
+
+.choice-btn:hover {
+  color: #B00B69;
+  border: 1px solid #B00B69;
+  background-color: white;
+}
+
 /* !questions/choices section */
 
 /* stats page */
@@ -108,6 +128,12 @@ main {
   opacity: 1;
 }
 
+.highscores-header {
+  margin-bottom: 7px;
+}
 
+.no-scores {
+  margin-bottom: 10px;
+}
 /* view highscores page */
 

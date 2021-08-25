@@ -17,51 +17,72 @@ let currentChoice = -1;
 let score = 0;
 let correctAnswer = 0;
 
-// counts down from 75
 let timeLeft = 60;
 let time;
 
-// list of questions
 const questions = [
   {
-    question: "question1",
-    choices: ["a", "b", "c", "d"],
-    answer: "a",
+    question: "What does HTML stand for?",
+    choices: [
+      "Hyper Text Markup Language",
+      "Home Tool Makeup Language",
+      "Hyperlinks and Text Markup Language",
+      "Home Tacos Mayo Lasagna",
+    ],
+    answer: "Hyper Text Markup Language",
   },
   {
-    question: "question2",
-    choices: ["a", "b", "c", "d"],
-    answer: "c",
+    question: "Which is the correct HTML tag for the largest heading?",
+    choices: ["Head", "h1", "h6", "Pants"],
+    answer: "h1",
   },
   {
-    question: "question3",
-    choices: ["a", "b", "c", "d"],
-    answer: "b",
+    question: "Which HTML tag allows you to make a bulleted list?",
+    choices: ["ol", "d1", "ul", "bulleted list"],
+    answer: "ul",
   },
   {
-    question: "question4",
-    choices: ["a", "b", "c", "d"],
-    answer: "a",
+    question: "What does CSS stand for?",
+    choices: [
+      "Computer Style Sheets",
+      "Creative Style Sheets",
+      "Cascading Style Sheets",
+      "Crayon Simple sheets",
+    ],
+    answer: "Cascading Style Sheets",
   },
   {
-    question: "question5",
-    choices: ["a", "b", "c", "d"],
-    answer: "a",
+    question:
+      "Where in an HTML document is the correct place to refer to an external style sheet?",
+    choices: [
+      "At the top of the bowl",
+      "In the head",
+      "In the body",
+      "At the bottom of the document",
+    ],
+    answer: "In the head",
   },
   {
-    question: "question6",
-    choices: ["a", "b", "c", "d"],
-    answer: "a",
+    question: "What does the triple equals ( === ) in JavaScript prevent?",
+    choices: [
+      "the reassignment of variables",
+      "type coercion",
+      "a value of null",
+      "none of the above",
+    ],
+    answer: "type coercion",
   },
   {
-    question: "question7",
-    choices: ["a", "b", "c", "d"],
-    answer: "a",
+    question: "Arrays in JavaScript can be used to store __________.",
+    choices: [
+      "numbers and strings",
+      "other arrays",
+      "booleans",
+      "all of the above",
+    ],
+    answer: "all of the above",
   },
 ];
-
-
-
 
 function homePage() {
   mainEl.appendChild(headerEl);
@@ -220,19 +241,18 @@ function viewHighscores() {
   highscoresHeaderEl.textContent = "Highscores";
   mainEl.appendChild(highscoresHeaderEl);
 
-  let noScoresMsg = document.createElement('p')
-  noScoresMsg.setAttribute('class', 'no-scores')
-  mainEl.appendChild(noScoresMsg)
+  let noScoresMsg = document.createElement("p");
+  noScoresMsg.setAttribute("class", "no-scores");
+  mainEl.appendChild(noScoresMsg);
 
   let storedScores = JSON.parse(localStorage.getItem("scores"));
 
   mainEl.appendChild(scoresContainer);
-  
 
-  if(storedScores == null){
-    noScoresMsg.textContent = 'Be the first to take the quiz and post a score!'
+  if (storedScores == null) {
+    noScoresMsg.textContent = "Be the first to take the quiz and post a score!";
     scoresContainer.appendChild(playAgainBtn);
-    playAgainBtn.textContent = 'Play now!'
+    playAgainBtn.textContent = "Play now!";
   } else {
     for (let i = 0; i < storedScores.length; i++) {
       let userScore = document.createElement("li");
@@ -244,8 +264,6 @@ function viewHighscores() {
     playAgainBtn.textContent = "Play again!";
     scoresContainer.appendChild(playAgainBtn);
   }
-
-
 }
 
 function reStartQuiz() {
@@ -254,6 +272,7 @@ function reStartQuiz() {
   timeEl.textContent = 0;
   currentQuestion = -1;
   currentChoice = -1;
+  correctAnswer = 0;
   score = 0;
   timeLeft = 60;
   homePage();
