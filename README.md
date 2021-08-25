@@ -15,7 +15,7 @@ On page load, the user is presented with the coding quiz.
 ![Screen Shot 2021-08-25 at 12 50 18 PM](https://user-images.githubusercontent.com/73543476/130840493-424c419b-3b0c-4187-a4b7-3e880e34341e.png)
 
 
-Once the user clicks the start button they will have 75 seconds to answer all seven questions.  
+Once the user clicks the start button they will have 60 seconds to answer all seven questions.  
 ![Screen Shot 2021-08-25 at 12 50 42 PM](https://user-images.githubusercontent.com/73543476/130840559-6586bcb8-9803-40f4-af07-1210d83c2f9d.png)
 
 
