@@ -6,11 +6,11 @@ Timed multiple-choice coding quiz that utilizes local storage to store and displ
 ## Deployed site
 https://doublelforce5.github.io/Code_Quiz/
 
-## Installation/Usage instructions 
+## Installation
 - Clone this repository and open it within VS Code or any text editor of your choosing.
 - Use live server or open default browser to view the code quiz in your local browser.  
 
-
+## Usage instructions 
 On page load, the user is presented with the coding quiz. 
 ![Screen Shot 2021-08-25 at 12 50 18 PM](https://user-images.githubusercontent.com/73543476/130840493-424c419b-3b0c-4187-a4b7-3e880e34341e.png)
 
