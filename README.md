@@ -21,8 +21,11 @@ Once the user clicks the start button they will have 60 seconds to answer all se
 
 For each correct answer, the user is awarded five points. 
 However, for each incorrect answer, the user is penalized and five seconds are deducted from the clock.
+At the end of the quiz, the user is invited to enter their initials to save their score. 
 ![Screen Shot 2021-08-25 at 12 51 16 PM](https://user-images.githubusercontent.com/73543476/130840633-e70a1294-fc37-49f9-ae6a-6cd50ce1963f.png)
 
+
+Upon entering their initials, the user's score is then posted to the highscores section of the application. 
 ![Screen Shot 2021-08-25 at 12 51 38 PM](https://user-images.githubusercontent.com/73543476/130840684-e3b2e024-556b-42d7-9d1f-c35deb5b836d.png)
 
 
