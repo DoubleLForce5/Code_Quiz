@@ -10,12 +10,19 @@ https://doublelforce5.github.io/Code_Quiz/
 - Clone this repository and open it within VS Code or any text editor of your choosing.
 - Use live server or open default browser to view the code quiz in your local browser.  
 
+
 On page load, the user is presented with the coding quiz. 
 ![Screen Shot 2021-08-25 at 12 50 18 PM](https://user-images.githubusercontent.com/73543476/130840493-424c419b-3b0c-4187-a4b7-3e880e34341e.png)
 
-Once the user clicks the start button they have 75 seconds to answer all seven questions. 
+
+Once the user clicks the start button they will have 75 seconds to answer all seven questions.  
 ![Screen Shot 2021-08-25 at 12 50 42 PM](https://user-images.githubusercontent.com/73543476/130840559-6586bcb8-9803-40f4-af07-1210d83c2f9d.png)
+
+
+For each correct answer, the user is awarded five points. 
+However, for each incorrect answer, the user is penalized and five seconds are deducted from the clock.
 ![Screen Shot 2021-08-25 at 12 51 16 PM](https://user-images.githubusercontent.com/73543476/130840633-e70a1294-fc37-49f9-ae6a-6cd50ce1963f.png)
+
 ![Screen Shot 2021-08-25 at 12 51 38 PM](https://user-images.githubusercontent.com/73543476/130840684-e3b2e024-556b-42d7-9d1f-c35deb5b836d.png)
 
 
