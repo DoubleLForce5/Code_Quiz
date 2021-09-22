@@ -31,7 +31,7 @@ Upon entering their initials, the user's score is then posted to the highscores 
 
 ## Tech 
 - CSS
-- HMTL
+- HTML
 - JavaScript
 
 ## MIT License
